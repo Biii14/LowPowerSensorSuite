@@ -5,7 +5,7 @@
  *  GND     GND
  */
 #include <SoftwareSerial.h>
-#define MeasureInterval 5000
+#define MeasureInterval 10000
 #define SoftUse true
 #if SoftUse == true
   SoftwareSerial N2OSerial(P1_4, P1_3); // RX, TX
@@ -24,7 +24,6 @@ void setup() {
   Serial.begin(4800);
   N2OSerial.begin(4800);
   Serial.println("System Ready");
-  
 }
 void loop() {
   if(millis() - MeasureTime >= MeasureInterval){
@@ -36,8 +35,8 @@ void loop() {
 }
 void N2OGet(){
   N2OSerial.write(N2OCmd,7);
-  delay(1000);
   Serial.println("Request");
+  delay(1000);
   if(N2OSerial.available()){
     byte recebyte = N2OSerial.read();
     Serial.print(recebyte, HEX);
